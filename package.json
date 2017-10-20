@@ -11,14 +11,33 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:extension.build"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+            "command": "extension.build",
+            "title": "build current file"
+        }],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "extension.build",
+                    "group" : "edit@4"
+                }
+            ]
+        },
+        "configuration": {
+            "type" : "object",
+            "title" : "rightclick configurations",
+            "properties": {
+                "rightclick.CommandToBind" :{
+                    "type" :"string",
+                    "default" : null,
+                    "description": "Command bound to right click menu"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -28,8 +47,9 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.5.3",
+        "typescript": "^2.5.2",
         "vscode": "^1.1.5",
+        "mocha": "^3.5.0",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
     }
